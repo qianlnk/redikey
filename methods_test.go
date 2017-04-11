@@ -8,7 +8,7 @@ import (
 
 	"sync"
 
-	"github.com/qianlnk/redis"
+	"github.com/qianlnk/redikey"
 )
 
 func TestSet(*testing.T) {
@@ -18,7 +18,7 @@ func TestSet(*testing.T) {
 			wg.Add(1)
 			go func(i int) {
 				defer wg.Done()
-				err := redis.Set("test"+strconv.Itoa(i), "123", time.Second*10)
+				err := redikey.Set("test"+strconv.Itoa(i), "123", time.Second*10)
 				fmt.Println(i, err)
 			}(i)
 		}
@@ -30,7 +30,7 @@ func TestSet(*testing.T) {
 
 func TestGet(*testing.T) {
 	var test string
-	redis.Select(2)
-	redis.Get("test", &test)
+	redikey.Select(2)
+	redikey.Get("test", &test)
 	fmt.Println(test)
 }
